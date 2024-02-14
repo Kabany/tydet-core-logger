@@ -50,7 +50,7 @@ If there are no configurations, the following default setting will applied:
 ```js
 let default = {
   mode: LoggerMode.CONSOLE,
-  min: [LogLevel.INFO]
+  min: [LogLevel.DEBUG]
 }
 ```
 
@@ -59,8 +59,8 @@ let default = {
 
 The are 6 levels with the following order:
 
-* **info**: Used for basic logs.
-* **debug**: Used for basic logs and mostly for debugging messages, but it has more priority than the info level.
+* **debug**: Used for basic logs.
+* **info**: Used for basic logs, but it has more priority than the debug level.
 * **success**: Used mostly for success messages or responses, such as any 2XX HTTP response from Express JS.
 * **failure**: Used mostly for expected failed responses, such as any 4XX or 5XX HTTP responses from Express JS.
 * **warning**: Used for warning messages. It has more priority than the success and failure levels.

@@ -6,15 +6,21 @@ import axios from "axios"
 import { CoreError, Service } from "tydet-core";
 import { StringUtils } from "tydet-utils";
 
+/**
+ * Defines where to send the logs
+ */
 export enum LoggerMode {
   CONSOLE = "CONSOLE",
   FILE = "FILE",
   WEBHOOK = "WEBHOOK"
 }
 
+/**
+ * Define the priority of messages
+ */
 export enum LogLevel {
-  INFO = "INFO",
   DEBUG = "DEBUG",
+  INFO = "INFO",
   SUCCESS = "SUCCESS",
   FAILURE = "FAILURE",
   WARNING = "WARNING",
@@ -148,26 +154,56 @@ export class Logger extends Service {
     }
   }
 
-  info(...args: any[]) {
-    this.write(LogLevel.INFO, ...args)
-  }
-
+  /**
+   * Logs with the `DEBUG` level.
+   * Used for basic logs.
+   * @param args - Any value to log
+   */
   debug(...args: any[]) {
     this.write(LogLevel.DEBUG, ...args)
   }
 
+  /**
+   * Logs with the `INFO` level.
+   * Used for basic logs with more priority that the debug level.
+   * @param args - Any value to log
+   */
+  info(...args: any[]) {
+    this.write(LogLevel.INFO, ...args)
+  }
+
+  /**
+   * Logs with the `SUCCESS` level.
+   * Used mostly for success messages or responses, such as any 2XX HTTP response from Express JS.
+   * @param args - Any value to log
+   */
   success(...args: any[]) {
     this.write(LogLevel.SUCCESS, ...args)
   }
 
+  /**
+   * Logs with the `FAILURE` level.
+   * Used mostly for expected failed responses, such as any 4XX or 5XX HTTP responses from Express JS.
+   * @param args - Any value to log
+   */
   failure(...args: any[]) {
     this.write(LogLevel.FAILURE, ...args)
   }
 
+  /**
+   * Logs with the `WARNING` level.
+   * Used for warning messages. It has more priority than the success and failure levels.
+   * @param args - Any value to log
+   */
   warn(...args: any[]) {
     this.write(LogLevel.WARNING, ...args)
   }
 
+  /**
+   * Logs with the `ERROR` level.
+   * Used for error messages, both expected and unexpected. It is the message with more priority.
+   * @param args - Any value to log
+   */
   error(...args: any[]) {
     this.write(LogLevel.ERROR, ...args)
   }
