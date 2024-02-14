@@ -17,7 +17,38 @@ It is required to install [TyDeT Core][tydet-core] to use this module.
 
 ### Basic usage
 
-TBD.
+```js
+import { Context } from 'tydet-core';
+import { Logger, LoggerMode, LogLevel } from 'tydet-core-logger';
+
+let app = new Context()
+let logger = new Logger([
+  {
+    mode: LoggerMode.CONSOLE,
+    min: LogLevel.INFO
+  },
+  {
+    mode: LoggerMode.FILE,
+    path: "./logs/today.log"
+    max: LogLevel.SUCCESS
+  },
+  {
+    mode: LoggerMode.WEBHOOK,
+    endpoint: "https://mywebhookserver.com/logs",
+    only: [LogLevel.ERROR, LogLevel.WARNING]
+  }
+])
+app.mountService("logger", logger)
+
+logger.debug("This is a debug message")
+logger.info("This is an info message")
+logger.success("This is a success message")
+logger.failure("This is a failure message")
+logger.warn("This is a warning message")
+logger.error("This is an error message")
+```
+
+Check the [docs][docs] for more details about the service.
 
 ## Changelog
 
@@ -38,4 +69,4 @@ We'd love for you to contribute to TyAPI Core Logger and help make it even bette
 [changelog]: ./CHANGELOG.md
 [contribute]: ./CONTRIBUTING.md
 [tydet-core]: https://github.com/Kabany/tydet-core
-<!--[docs]: ./docs/README.md -->
+[docs]: ./docs/README.md

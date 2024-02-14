@@ -1,1 +1,1 @@
-export { Logger, LoggerMode } from "./logger.service"
+export { Logger, LoggerMode, LogLevel } from "./logger.service"
