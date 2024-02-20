@@ -125,7 +125,7 @@ export class Logger extends Service {
               // OK
             })
           } catch(err) {
-            throw new CoreError(`Logger: Error found in the endpoint URL '${set.endpoint}' for the mode WEBHOOK.\n${err}`)
+            throw new CoreError(`Logger: Error found in the endpoint URL '${set.endpoint}' for the mode WEBHOOK.\n${err.response}`)
           }
         } else {
           let p = ''

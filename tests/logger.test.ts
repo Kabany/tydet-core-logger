@@ -14,6 +14,7 @@ describe("Logger Service", () => {
     logger.warn("This is a warning message")
     logger.error("This is an error message")
     //expect(console.log).toHaveBeenCalledTimes(6)
+    await app.unmountServices()
   })
 
   it("Should print in a file", async () => {
@@ -30,6 +31,7 @@ describe("Logger Service", () => {
     logger.failure("This is a failure message")
     logger.warn("This is a warning message")
     logger.error("This is an error message")
+    await app.unmountServices()
   })
 
   it("Should print in a file", async () => {
@@ -46,5 +48,6 @@ describe("Logger Service", () => {
     logger.failure("This is a failure message")
     logger.warn("This is a warning message")
     logger.error("This is an error message")
+    await app.unmountServices()
   })
 })
