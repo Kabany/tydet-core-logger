@@ -38,7 +38,7 @@ let logger = new Logger([
     only: [LogLevel.ERROR, LogLevel.WARNING]
   }
 ])
-app.mountService("logger", logger)
+await app.mountService("logger", logger)
 
 logger.debug("This is a debug message")
 logger.info("This is an info message")

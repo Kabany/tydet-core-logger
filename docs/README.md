@@ -12,7 +12,7 @@ import { Logger, LoggerMode, LogLevel } from 'tydet-core-logger';
 
 let app = new Context()
 let logger = new Logger()
-app.mountService("logger", logger)
+await app.mountService("logger", logger)
 
 logger.info("This is an info message")
 logger.debug("This is a debug message")
