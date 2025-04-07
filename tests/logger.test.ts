@@ -3,7 +3,6 @@ import { LogLevel, Logger, LoggerMode } from "../src/logger.service"
 
 describe("Logger Service", () => {
   it("Should print in console", async () => {
-    //console.log = jest.fn();
     let app = new Context()
     let logger = new Logger()
     await app.mountService("logger", logger)
@@ -13,8 +12,7 @@ describe("Logger Service", () => {
     logger.failure("This is a failure message")
     logger.warn("This is a warning message")
     logger.error("This is an error message")
-    //expect(console.log).toHaveBeenCalledTimes(6)
-    await app.unmountServices()
+    await app.ejectAllServices()
   })
 
   it("Should print in a file", async () => {
@@ -31,14 +29,14 @@ describe("Logger Service", () => {
     logger.failure("This is a failure message")
     logger.warn("This is a warning message")
     logger.error("This is an error message")
-    await app.unmountServices()
+    await app.ejectAllServices()
   })
 
   it("Should print in a file", async () => {
     let app = new Context()
     let logger = new Logger([{
       mode: LoggerMode.WEBHOOK,
-      endpoint: "https://webhook-test.com/d313d71a9deb81e27b02dd058c128818",
+      endpoint: "https://webhook-test.com/4217328ddca8c77bd1c01aee3ce4a5bc",
       min: LogLevel.INFO
     }])
     await app.mountService("logger", logger)
@@ -48,6 +46,6 @@ describe("Logger Service", () => {
     logger.failure("This is a failure message")
     logger.warn("This is a warning message")
     logger.error("This is an error message")
-    await app.unmountServices()
+    await app.ejectAllServices()
   })
 })

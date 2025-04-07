@@ -1,7 +1,7 @@
-import chalk from "chalk";
 import path from "path"
 import fs from "fs"
 import axios from "axios"
+import pc from "picocolors"
 
 import { CoreError, Service } from "tydet-core";
 import { StringUtils } from "tydet-utils";
@@ -129,24 +129,29 @@ export class Logger extends Service {
           }
         } else {
           let p = ''
-          if (level == LogLevel.INFO) {
-            p += chalk.bgBlue(`${level}`)
-            p += chalk.blue(` ${d} ${s}`)
-          } else if (level == LogLevel.DEBUG) {
-            p += chalk.bgMagenta(`${level}`)
-            p += chalk.magenta(` ${d} ${s}`)
-          } else if (level == LogLevel.SUCCESS) {
-            p += chalk.bgGreen(`${level}`)
-            p += chalk.green(` ${d} ${s}`)
-          } else if (level == LogLevel.FAILURE) {
-            p += chalk.bgYellow(`${level}`)
-            p += chalk.yellow(` ${d} ${s}`)
-          } else if (level == LogLevel.WARNING) {
-            p += chalk.bgHex('#FFA500').visible(`${level}`)
-            p += chalk.hex('#FFA500').visible(` ${d} ${s}`)
-          } else if (level == LogLevel.ERROR) {
-            p += chalk.bgRed(`${level}`)
-            p += chalk.red(` ${d} ${s}`)
+          if (pc.isColorSupported) {
+            if (level == LogLevel.INFO) {
+              p += pc.bgBlue(pc.white(`${level}`))
+              p += pc.blue(` ${d} ${s}`)
+            } else if (level == LogLevel.DEBUG) {
+              p += pc.bgMagenta(pc.white(`${level}`))
+              p += pc.magenta(` ${d} ${s}`)
+            } else if (level == LogLevel.SUCCESS) {
+              p += pc.bgGreen(pc.white(`${level}`))
+              p += pc.green(` ${d} ${s}`)
+            } else if (level == LogLevel.FAILURE) {
+              p += pc.bgYellow(`${level}`)
+              p += pc.yellow(` ${d} ${s}`)
+            } else if (level == LogLevel.WARNING) {
+              p += pc.bgYellow(`${level}`)
+              p += pc.yellow(` ${d} ${s}`)
+            } else if (level == LogLevel.ERROR) {
+              p += pc.bgRed(pc.white(`${level}`))
+              p += pc.red(` ${d} ${s}`)
+            }
+          } else {
+            p += `${level}`
+            p += ` ${d} ${s}`
           }
           console.log(p)
         }
