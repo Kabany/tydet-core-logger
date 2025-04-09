@@ -108,7 +108,15 @@ export class Logger extends Service {
         let d = `[${(new Date()).toLocaleString()}]:`
         let s = ''
         for (let arg of args) {
-          s += `${arg} `
+          if (arg instanceof Error) {
+            if (arg.stack) {
+              s += `\n${arg.stack}\n`
+            } else {
+              s += `${arg.name}: ${arg.message}`
+            }
+          } else {
+            s += `${arg} `
+          }
         }
         if (m == LoggerMode.FILE) {
           try {
